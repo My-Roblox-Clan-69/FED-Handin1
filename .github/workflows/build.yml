@@ -18,8 +18,11 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Install .NET MAUI Windows Workload
-        run: dotnet workload install maui-windows
+      - name: Remove All Other Workloads (Cleanup)
+        run: dotnet workload uninstall android ios maccatalyst tvos macos
+
+      - name: Install .NET MAUI Windows Workload Only
+        run: dotnet workload install maui-windows --skip-manifest-update
 
       - name: Build application for Windows only
         run: dotnet build --configuration Release --framework net8.0-windows10.0.19041.0
