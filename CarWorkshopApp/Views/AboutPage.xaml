@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarWorkshopApp.Views.AboutPage"
+             Title="About Us">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <Label Text="About Car Workshop"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <Image Source="workshop_logo.png"
+               HeightRequest="150"
+               Aspect="AspectFit"
+               HorizontalOptions="Center"/>
+
+        <Label Text="At Car Workshop, we provide professional car maintenance and repair services to ensure your vehicle runs smoothly."
+               FontSize="16"
+               TextColor="Gray"
+               HorizontalTextAlignment="Center"/>
+
+        <Label Text="📍 Location: 123 Workshop Lane, CityName"
+               FontSize="14"
+               TextColor="Gray"
+               HorizontalTextAlignment="Center"/>
+
+        <Label Text="📞 Contact: +45 123 456 789"
+               FontSize="14"
+               TextColor="Gray"
+               HorizontalTextAlignment="Center"/>
+
+    </VerticalStackLayout>
+</ContentPage>
