@@ -3,13 +3,36 @@
     x:Class="CarWorkshopApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:CarWorkshopApp"
+    xmlns:views="clr-namespace:CarWorkshopApp.Views"
     Shell.FlyoutBehavior="Flyout"
-    Title="CarWorkshopApp">
+    Title="Car Workshop App">
 
+    <!-- Home Page -->
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate views:HomePage}"
+        Route="HomePage"
+        Icon="home_icon.png" />
+
+    <!-- Services Page -->
+    <ShellContent
+        Title="Services"
+        ContentTemplate="{DataTemplate views:ServicesPage}"
+        Route="ServicesPage"
+        Icon="services_icon.png" />
+
+    <!-- Booking Page -->
+    <ShellContent
+        Title="Book a Service"
+        ContentTemplate="{DataTemplate views:BookingPage}"
+        Route="BookingPage"
+        Icon="booking_icon.png" />
+
+    <!-- About Page -->
+    <ShellContent
+        Title="About Us"
+        ContentTemplate="{DataTemplate views:AboutPage}"
+        Route="AboutPage"
+        Icon="about_icon.png" />
 
 </Shell>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarWorkshopApp.Views.BookingPage"
+             Title="Book a Service">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            
+            <!-- Customer Information -->
+            <Label Text="Customer Information"
+                   FontSize="20"
+                   FontAttributes="Bold"/>
+            
+            <Entry x:Name="customerName"
+                   Placeholder="Full Name"
+                   Keyboard="Text"/>
+
+            <Entry x:Name="customerAddress"
+                   Placeholder="Address"
+                   Keyboard="Text"/>
+
+            <!-- Car Information -->
+            <Label Text="Car Details"
+                   FontSize="20"
+                   FontAttributes="Bold"/>
+
+            <Entry x:Name="carBrand"
+                   Placeholder="Car Brand"
+                   Keyboard="Text"/>
+
+            <Entry x:Name="carModel"
+                   Placeholder="Car Model"
+                   Keyboard="Text"/>
+
+            <Entry x:Name="carRegistration"
+                   Placeholder="Registration Number"
+                   Keyboard="Text"/>
+
+            <!-- Booking Date & Time -->
+            <Label Text="Select Date and Time"
+                   FontSize="20"
+                   FontAttributes="Bold"/>
+
+            <DatePicker x:Name="datePicker"
+                        MinimumDate="{Binding Today}"/>
+
+            <TimePicker x:Name="timePicker"/>
+
+            <!-- Task Description -->
+            <Label Text="Service Description"
+                   FontSize="20"
+                   FontAttributes="Bold"/>
+
+            <Editor x:Name="serviceDescription"
+                    Placeholder="Describe what needs to be done..."
+                    AutoSize="TextChanges"
+                    HeightRequest="100"/>
+
+            <!-- Confirm Button -->
+            <Button Text="Confirm Booking"
+                    Clicked="ConfirmBooking"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    CornerRadius="10"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
