@@ -1,45 +1,46 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CarWorkshopApp.Data;
+using CarWorkshopApp.Services;
 using System;
-using System.Windows.Input;
-using Microsoft.Maui.Controls;
+using System.Threading.Tasks;
 
 namespace CarWorkshopApp.ViewModels
 {
     public partial class BookingViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private string customerName;
+        private readonly BookingService _bookingService;
 
         [ObservableProperty]
-        private string customerAddress;
+        private string? customerName;
 
         [ObservableProperty]
-        private string carBrand;
+        private string? customerAddress;
 
         [ObservableProperty]
-        private string carModel;
+        private string? carBrand;
 
         [ObservableProperty]
-        private string carRegistration;
+        private string? carModel;
 
         [ObservableProperty]
-        private string serviceDescription;
+        private string? carRegistration;
 
         [ObservableProperty]
         private DateTime selectedDate = DateTime.Today;
 
         [ObservableProperty]
-        private TimeSpan selectedTime = new TimeSpan(10, 0, 0);
+        private string? serviceDescription;
 
-        public ICommand ConfirmBookingCommand { get; }
+        public IRelayCommand ConfirmBookingCommand { get; }
 
-        public BookingViewModel()
+        public BookingViewModel(BookingService bookingService)
         {
-            ConfirmBookingCommand = new RelayCommand(ConfirmBooking);
+            _bookingService = bookingService;
+            ConfirmBookingCommand = new RelayCommand(async () => await ConfirmBooking());
         }
 
-        private async void ConfirmBooking()
+        private async Task ConfirmBooking()
         {
             if (string.IsNullOrWhiteSpace(CustomerName) ||
                 string.IsNullOrWhiteSpace(CustomerAddress) ||
@@ -48,16 +49,24 @@ namespace CarWorkshopApp.ViewModels
                 string.IsNullOrWhiteSpace(CarRegistration) ||
                 string.IsNullOrWhiteSpace(ServiceDescription))
             {
-                await Application.Current.MainPage.DisplayAlert("Missing Information", "Please fill in all fields before booking.", "OK");
+                await Shell.Current.DisplayAlert("Missing Information", "Please fill in all fields before booking.", "OK");
                 return;
             }
 
-            string message = $"Booking for {CustomerName} at {CustomerAddress}\n" +
-                             $"Car: {CarBrand} {CarModel} ({CarRegistration})\n" +
-                             $"Service: {ServiceDescription}\n" +
-                             $"Date: {SelectedDate:MMMM dd, yyyy} at {SelectedTime:hh\\:mm tt}";
+            var newBooking = new Booking
+            {
+                CustomerName = CustomerName,
+                CustomerAddress = CustomerAddress,
+                CarBrand = CarBrand,
+                CarModel = CarModel,
+                CarRegistration = CarRegistration,
+                SelectedDate = SelectedDate,
+                ServiceDescription = ServiceDescription
+            };
 
-            await Application.Current.MainPage.DisplayAlert("Booking Confirmed", message, "OK");
+            await _bookingService.AddBookingAsync(newBooking);
+
+            await Shell.Current.DisplayAlert("Success", "Booking saved to database!", "OK");
         }
     }
 }

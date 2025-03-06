@@ -1,27 +1,24 @@
 using Microsoft.Maui.Controls;
+using System;
 
 namespace CarWorkshopApp.Views
 {
     public partial class HomePage : ContentPage
     {
-        public HomePage()
-        {
-            InitializeComponent();
-        }
+	public HomePage()
+	{
+	    InitializeComponent();
+	}
 
-        private async void GoToBookingPage(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new BookingPage());
-        }
+	private async void GoToBookingPage(object sender, EventArgs e)
+	{
+		await Shell.Current.GoToAsync("BookingPage");
+	}
 
-        private async void GoToServicesPage(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ServicesPage());
-        }
+	private async void GoToOverviewPage(object sender, EventArgs e)
+	{
+		await Shell.Current.GoToAsync("OverviewPage");
+	}
 
-        private async void GoToAboutPage(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AboutPage());
-        }
     }
 }
