@@ -1,39 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="CarWorkshopApp.Views.HomePage"
-             Title="Home">
+             Title="Home"
+             BackgroundColor="#f8f9fa">
 
-    <VerticalStackLayout Padding="20" Spacing="20">
+    <VerticalStackLayout Padding="30" Spacing="20">
 
         <Label Text="Welcome to Car Workshop"
-               FontSize="24"
+               FontSize="28"
                FontAttributes="Bold"
-               HorizontalOptions="Center"/>
-
-        <Image Source="car_service.png"
-               HeightRequest="200"
-               Aspect="AspectFit"
+               TextColor="Black"
                HorizontalOptions="Center"/>
 
         <Button Text="Book a Service"
                 Clicked="GoToBookingPage"
-                BackgroundColor="CornflowerBlue"
+                BackgroundColor="#4A90E2"
                 TextColor="White"
-                CornerRadius="10"/>
+                CornerRadius="12"
+                FontSize="18"
+                HeightRequest="50"/>
+        <Button 
+                Text="Overview"
+                Clicked="GoToOverviewPage"
+                BackgroundColor="#FFA500"
+                TextColor="White"
+                CornerRadius="12"
+                FontSize="18"
+                HeightRequest="50"/>
 
-        <Button Text="View Services"
-                Clicked="GoToServicesPage"
-                BackgroundColor="DarkSlateBlue"
-                TextColor="White"
-                CornerRadius="10"/>
-
-        <Button Text="About Us"
-                Clicked="GoToAboutPage"
-                BackgroundColor="DarkGray"
-                TextColor="White"
-                CornerRadius="10"/>
 
     </VerticalStackLayout>
 </ContentPage>
