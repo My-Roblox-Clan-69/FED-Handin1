@@ -1,5 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using CarWorkshopApp.Data;
+
 
 namespace CarWorkshopApp;
 public static class MauiProgram
@@ -15,6 +19,11 @@ public static class MauiProgram
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
+
+string dbPath = Path.Combine(FileSystem.AppDataDirectory, "carworkshop.db");
+builder.Services.AddDbContext<CarWorkshopDbContext>(options =>
+    options.UseSqlite($"Data Source={dbPath}"));
+
         return builder.Build();
     }
 }
