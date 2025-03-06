@@ -1,45 +1,41 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using CarWorkshopApp.Data;
 
 namespace CarWorkshopApp.Services
 {
     public class BookingService
     {
-        private readonly CarWorkshopDbContext _context;
+        private readonly CarWorkshopDbContext _dbContext;
 
-        public BookingService(CarWorkshopDbContext context)
+        public BookingService(CarWorkshopDbContext dbContext)
         {
-            _context = context;
+            _dbContext = dbContext;
         }
 
         // Get all bookings
         public async Task<List<Booking>> GetBookingsAsync()
         {
-            return await _context.Bookings.ToListAsync();
+            return await _dbContext.GetBookingsAsync();
         }
 
         // Add a new booking
         public async Task AddBookingAsync(Booking booking)
         {
-            _context.Bookings.Add(booking);
-            await _context.SaveChangesAsync();
+            await _dbContext.AddBookingAsync(booking);
         }
 
         // Delete a booking
         public async Task DeleteBookingAsync(int id)
         {
-            var booking = await _context.Bookings.FindAsync(id);
-            if (booking != null)
-            {
-                _context.Bookings.Remove(booking);
-                await _context.SaveChangesAsync();
-            }
+            await _dbContext.DeleteBookingAsync(id);
         }
+
+        // Seed Test Data (Optional)
         public async Task SeedTestData()
         {
-            if (!_context.Bookings.Any())
+            var existingBookings = await _dbContext.GetBookingsAsync();
+            if (existingBookings.Count == 0)
             {
                 var testBooking = new Booking
                 {
@@ -52,9 +48,18 @@ namespace CarWorkshopApp.Services
                     ServiceDescription = "Oil Change"
                 };
 
-                _context.Bookings.Add(testBooking);
-                await _context.SaveChangesAsync();
+                await _dbContext.AddBookingAsync(testBooking);
             }
         }
+        public async Task DebugPrintAllBookings()
+        {
+            var allBookings = await _dbContext.GetBookingsAsync();
+            Console.WriteLine("📌 All Bookings in Database:");
+            foreach (var booking in allBookings)
+            {
+                Console.WriteLine($"- {booking.Id}: {booking.CustomerName}, {booking.SelectedDate}");
+            }
+        }
+
     }
 }

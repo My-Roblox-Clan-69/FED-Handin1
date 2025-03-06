@@ -1,3 +1,5 @@
+using CarWorkshopApp.Data;
+using CarWorkshopApp.Services;
 using Microsoft.Maui.Controls;
 using System;
 
@@ -5,9 +7,12 @@ namespace CarWorkshopApp.Views
 {
     public partial class BookingPage : ContentPage
     {
-        public BookingPage()
+        private readonly BookingService _bookingService;
+
+        public BookingPage(BookingService bookingService)
         {
             InitializeComponent();
+            _bookingService = bookingService; // ✅ Inject BookingService
         }
 
         private async void ConfirmBooking(object sender, EventArgs e)
@@ -19,8 +24,7 @@ namespace CarWorkshopApp.Views
             string model = carModel.Text;
             string registration = carRegistration.Text;
             string serviceTask = serviceDescription.Text;
-            string selectedDate = datePicker.Date.ToShortDateString();
-            string selectedTime = timePicker.Time.ToString(@"hh\:mm");
+            DateTime selectedDateTime = datePicker.Date.Add(timePicker.Time); // ✅ Combine Date & Time
 
             // Validate inputs
             if (string.IsNullOrWhiteSpace(name) ||
@@ -34,13 +38,24 @@ namespace CarWorkshopApp.Views
                 return;
             }
 
-            // Show booking confirmation
-            string message = $"Booking for {name} at {address}\n" +
-                             $"Car: {brand} {model} ({registration})\n" +
-                             $"Service: {serviceTask}\n" +
-                             $"Date: {selectedDate} at {selectedTime}";
+            // Create new booking
+            var newBooking = new Booking
+            {
+                CustomerName = name,
+                CustomerAddress = address,
+                CarBrand = brand,
+                CarModel = model,
+                CarRegistration = registration,
+                SelectedDate = selectedDateTime,
+                ServiceDescription = serviceTask
+            };
 
-            await DisplayAlert("Booking Confirmed", message, "OK");
+            // ✅ Save to database
+            await _bookingService.AddBookingAsync(newBooking);
+            await DisplayAlert("Booking Confirmed", "Your service has been booked successfully!", "OK");
+
+            // ✅ Print all saved bookings for debugging
+            await _bookingService.DebugPrintAllBookings();
         }
     }
 }
