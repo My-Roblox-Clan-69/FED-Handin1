@@ -30,6 +30,9 @@ namespace CarWorkshopApp.ViewModels
         private DateTime selectedDate = DateTime.Today;
 
         [ObservableProperty]
+        private TimeSpan selectedTime = TimeSpan.FromHours(12); // ✅ Default time: 12:00 PM
+
+        [ObservableProperty]
         private string? serviceDescription;
 
         public IRelayCommand ConfirmBookingCommand { get; }
@@ -53,6 +56,9 @@ namespace CarWorkshopApp.ViewModels
                 return;
             }
 
+            // ✅ Combine date and time before saving
+            DateTime bookingDateTime = SelectedDate.Add(SelectedTime);
+
             var newBooking = new Booking
             {
                 CustomerName = CustomerName,
@@ -60,13 +66,33 @@ namespace CarWorkshopApp.ViewModels
                 CarBrand = CarBrand,
                 CarModel = CarModel,
                 CarRegistration = CarRegistration,
-                SelectedDate = SelectedDate,
+                SelectedDate = bookingDateTime,  // ✅ Stores date & time
                 ServiceDescription = ServiceDescription
             };
 
+            // ✅ Save to database
             await _bookingService.AddBookingAsync(newBooking);
 
+            // ✅ Print all bookings for debugging
+            await _bookingService.DebugPrintAllBookings();
+
+            // ✅ Show success message
             await Shell.Current.DisplayAlert("Success", "Booking saved to database!", "OK");
+
+            // ✅ Reset form fields after saving
+            ClearForm();
+        }
+
+        private void ClearForm()
+        {
+            CustomerName = string.Empty;
+            CustomerAddress = string.Empty;
+            CarBrand = string.Empty;
+            CarModel = string.Empty;
+            CarRegistration = string.Empty;
+            ServiceDescription = string.Empty;
+            SelectedDate = DateTime.Today;
+            SelectedTime = TimeSpan.FromHours(12); // Reset to default time
         }
     }
 }

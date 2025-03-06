@@ -19,15 +19,37 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame Padding="10" BorderColor="Gray">
-                            <StackLayout>
+                        <Frame Padding="10" BorderColor="Gray" CornerRadius="8" Margin="5">
+                            <VerticalStackLayout Spacing="5">
                                 <Label Text="{Binding CustomerName}" 
                                        FontSize="18"
-                                       FontAttributes="Bold"/>
-                                <Label Text="{Binding CarBrand}" FontSize="16"/>
-                                <Label Text="{Binding ServiceDescription}" FontSize="14"/>
-                                <Label Text="{Binding SelectedDate, StringFormat='{0:MMMM dd, yyyy HH:mm}'}" FontSize="14"/>
-                            </StackLayout>
+                                       FontAttributes="Bold"
+                                       TextColor="Black"/>
+
+                                <Label Text="{Binding CustomerAddress, StringFormat='🏠 Address: {0}'}"
+                                       FontSize="14" 
+                                       TextColor="DarkGray"/>
+
+                                <Label Text="{Binding CarBrand, StringFormat='🚗 Brand: {0}'}"
+                                       FontSize="16"
+                                       TextColor="Black"/>
+
+                                <Label Text="{Binding CarModel, StringFormat='📌 Model: {0}'}"
+                                       FontSize="14"
+                                       TextColor="DarkGray"/>
+
+                                <Label Text="{Binding CarRegistration, StringFormat='🔢 Reg: {0}'}"
+                                       FontSize="14"
+                                       TextColor="DarkGray"/>
+
+                                <Label Text="{Binding ServiceDescription, StringFormat='🛠 Task: {0}'}"
+                                       FontSize="14"
+                                       TextColor="DarkGray"/>
+
+                                <Label Text="{Binding SelectedDate, StringFormat='📅 Date: {0:MMMM dd, yyyy HH:mm}'}"
+                                       FontSize="14"
+                                       TextColor="Black"/>
+                            </VerticalStackLayout>
                         </Frame>
                     </ViewCell>
                 </DataTemplate>

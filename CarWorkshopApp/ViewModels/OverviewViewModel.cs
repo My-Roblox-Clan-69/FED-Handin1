@@ -23,35 +23,40 @@ namespace CarWorkshopApp.ViewModels
         public OverviewViewModel(BookingService bookingService)
         {
             _bookingService = bookingService ?? throw new ArgumentNullException(nameof(bookingService));
-            LoadBookingsAsync();
+            Task.Run(async () => await LoadBookingsAsync()); // ✅ Ensure async execution
         }
-
 
         partial void OnSelectedDateChanged(DateTime value)
         {
-            LoadBookingsAsync(); // ✅ Reload bookings when date changes
-            OnPropertyChanged(nameof(BookingsForSelectedDate)); // ✅ Ensure UI updates
+            Task.Run(async () => await LoadBookingsAsync()); // ✅ Ensure UI updates when date changes
         }
 
-        public async Task LoadBookingsAsync()  // ✅ Change from private to public
+        public async Task LoadBookingsAsync()
         {
-            if (_bookingService == null) return; // 🚨 Ensure service is not null
+            if (_bookingService == null) return;
 
-            var allBookings = await _bookingService.GetBookingsAsync();
-
-            var filteredBookings = allBookings
-                .Where(b => b.SelectedDate.HasValue && b.SelectedDate.Value.Date == SelectedDate.Date)
-                .ToList();
-
-            // ✅ Update ObservableCollection on the main thread
-            App.Current.Dispatcher.Dispatch(() =>
+            try
             {
-                BookingsForSelectedDate.Clear();
-                foreach (var booking in filteredBookings)
+                var allBookings = await _bookingService.GetBookingsAsync();
+
+                var filteredBookings = allBookings
+                    .Where(b => b.SelectedDate.Date == SelectedDate.Date)
+                    .ToList();
+
+                // ✅ Update ObservableCollection on the main thread
+                App.Current.Dispatcher.Dispatch(() =>
                 {
-                    BookingsForSelectedDate.Add(booking);
-                }
-            });
+                    BookingsForSelectedDate.Clear();
+                    foreach (var booking in filteredBookings)
+                    {
+                        BookingsForSelectedDate.Add(booking);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading bookings: {ex.Message}");
+            }
         }
     }
 }
