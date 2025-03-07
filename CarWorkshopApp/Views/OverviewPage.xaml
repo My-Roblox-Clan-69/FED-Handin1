@@ -26,27 +26,27 @@
                                        FontAttributes="Bold"
                                        TextColor="Black"/>
 
-                                <Label Text="{Binding CustomerAddress, StringFormat='🏠 Address: {0}'}"
+                                <Label Text="{Binding CustomerAddress, StringFormat='Address: {0}'}"
                                        FontSize="14" 
                                        TextColor="DarkGray"/>
 
-                                <Label Text="{Binding CarBrand, StringFormat='🚗 Brand: {0}'}"
+                                <Label Text="{Binding CarBrand, StringFormat='Brand: {0}'}"
                                        FontSize="16"
                                        TextColor="Black"/>
 
-                                <Label Text="{Binding CarModel, StringFormat='📌 Model: {0}'}"
+                                <Label Text="{Binding CarModel, StringFormat='Model: {0}'}"
                                        FontSize="14"
                                        TextColor="DarkGray"/>
 
-                                <Label Text="{Binding CarRegistration, StringFormat='🔢 Reg: {0}'}"
+                                <Label Text="{Binding CarRegistration, StringFormat='Reg: {0}'}"
                                        FontSize="14"
                                        TextColor="DarkGray"/>
 
-                                <Label Text="{Binding ServiceDescription, StringFormat='🛠 Task: {0}'}"
+                                <Label Text="{Binding ServiceDescription, StringFormat='Task: {0}'}"
                                        FontSize="14"
                                        TextColor="DarkGray"/>
 
-                                <Label Text="{Binding SelectedDate, StringFormat='📅 Date: {0:MMMM dd, yyyy HH:mm}'}"
+                                <Label Text="{Binding SelectedDate, StringFormat='Date: {0:MMMM dd, yyyy HH:mm}'}"
                                        FontSize="14"
                                        TextColor="Black"/>
                             </VerticalStackLayout>

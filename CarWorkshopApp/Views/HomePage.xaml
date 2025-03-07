@@ -3,40 +3,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarWorkshopApp.Views.HomePage"
              Title="Home"
-             BackgroundColor="#f8f9fa">
+             BackgroundColor="White">
 
-    <VerticalStackLayout Padding="30" Spacing="20">
-
-        <Label Text="Welcome to Car Workshop"
-               FontSize="28"
+    <Grid Padding="40" RowDefinitions="Auto, *, Auto">
+        
+        <!-- Header Text -->
+        <Label Text="Welcome to ServiceHub"
+               FontSize="32"
                FontAttributes="Bold"
                TextColor="Black"
-               HorizontalOptions="Center"/>
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Margin="0,30,0,20"/>
 
-        <Button Text="Book a Service"
-                Clicked="GoToBookingPage"
-                BackgroundColor="#4A90E2"
-                TextColor="White"
-                CornerRadius="12"
-                FontSize="18"
-                HeightRequest="50"/>
-        <Button 
-                Text="Overview"
-                Clicked="GoToOverviewPage"
-                BackgroundColor="#FFA500"
-                TextColor="White"
-                CornerRadius="12"
-                FontSize="18"
-                HeightRequest="50"/>
+        <!-- Buttons Section -->
+        <VerticalStackLayout Grid.Row="1" Spacing="20"
+                             HorizontalOptions="Center"
+                             WidthRequest="300">
 
-        <Button Text="Invoice"
-                Clicked="GoToInvoicePage"
-                BackgroundColor="#FF0000"
-                TextColor="White"
-                CornerRadius="12"
-                FontSize="18"
-                HeightRequest="50"/>
+            <Button Text="Book a Service"
+                    Clicked="GoToBookingPage"
+                    BackgroundColor="{StaticResource SexyBlue}"
+                    TextColor="White"
+                    CornerRadius="20"
+                    FontSize="20"
+                    HeightRequest="55"
+                    WidthRequest="250"/>
 
-
-    </VerticalStackLayout>
+            <Button Text="Service Overview"
+                    Clicked="GoToOverviewPage"
+                    BackgroundColor="{StaticResource SexyBlue}"
+                    TextColor="White"
+                    CornerRadius="20"
+                    FontSize="20"
+                    HeightRequest="55"
+                    WidthRequest="250"/>
+                    
+            <Button Text="Invoice"
+                    Clicked="GoToInvoicePage"
+                    BackgroundColor="{StaticResource SexyGreen}"
+                    TextColor="White"
+                    CornerRadius="20"
+                    FontSize="20"
+                    HeightRequest="55"
+                    WidthRequest="250"/>
+            
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>
