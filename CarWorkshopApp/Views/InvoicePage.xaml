@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CarWorkshopApp.ViewModels"
+             x:Class="CarWorkshopApp.Views.InvoicePage"
+             x:DataType="{x:Type viewModels:InvoiceViewModel}"
+             Title="Invoice">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label Text="Mechanic Name"/>
+        <Entry Text="{Binding MechanicName, Mode=TwoWay}" Placeholder="Enter mechanic's name"/>
+
+        <Label Text="Materials Used"/>
+        <Entry Text="{Binding MaterialsUsed, Mode=TwoWay}" Placeholder="List materials used"/>
+
+        <Label Text="Material Cost"/>
+        <Entry Text="{Binding MaterialCost, Mode=TwoWay}" Keyboard="Numeric" Placeholder="Enter material cost"/>
+
+        <Label Text="Hours Worked"/>
+        <Entry Text="{Binding HoursWorked, Mode=TwoWay}" Keyboard="Numeric" Placeholder="Enter hours worked"/>
+
+        <Label Text="Hourly Rate"/>
+        <Entry Text="{Binding HourlyRate, Mode=TwoWay}" Keyboard="Numeric" Placeholder="Enter hourly rate"/>
+
+        <Label Text="Total Cost"/>
+        <Label Text="{Binding TotalCost, Mode=OneWay, StringFormat='Total: {0:F2}'}" FontAttributes="Bold"/>
+
+    </VerticalStackLayout>
+</ContentPage>

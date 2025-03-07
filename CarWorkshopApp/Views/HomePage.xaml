@@ -29,6 +29,14 @@
                 FontSize="18"
                 HeightRequest="50"/>
 
+        <Button Text="Invoice"
+                Clicked="GoToInvoicePage"
+                BackgroundColor="#FF0000"
+                TextColor="White"
+                CornerRadius="12"
+                FontSize="18"
+                HeightRequest="50"/>
+
 
     </VerticalStackLayout>
 </ContentPage>
