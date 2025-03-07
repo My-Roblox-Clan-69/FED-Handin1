@@ -27,5 +27,11 @@
         Route="OverviewPage"
         Icon="calendar_icon.png"/>
 
+    <ShellContent
+        Title="Invoice"
+        ContentTemplate="{DataTemplate views:InvoicePage}"
+        Route="InvoicePage"
+        Icon="invoice_icon.png"/>
+
 
 </Shell>

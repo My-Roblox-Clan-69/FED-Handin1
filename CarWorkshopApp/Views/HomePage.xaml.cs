@@ -20,5 +20,9 @@ namespace CarWorkshopApp.Views
 		await Shell.Current.GoToAsync("OverviewPage");
 	}
 
+    private async void GoToInvoicePage(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("InvoicePage");
     }
+   } 
 }
